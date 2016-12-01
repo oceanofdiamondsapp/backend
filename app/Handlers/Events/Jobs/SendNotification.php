@@ -17,7 +17,7 @@ class SendNotification
      */
     public function handle(MessageWasSent $event)
     {
-        Mail::send('emails.jobs.message-was-sent', ['msg' => $event->message], function ($message) use ($event) {
+        Mail::send('emails.jobs.message-was-sent', ['msg' => $event->message, 'job' => $event->job], function ($message) use ($event) {
             $message->to($event->job->account->email, $event->job->account->name)
                     ->subject('Ocean of Diamonds Has Sent You a Message');
         });

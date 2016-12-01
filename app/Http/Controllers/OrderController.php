@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Events\Jobs\LoggableEventOccurred;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use OOD\Services\PushNotificationService;
 use Illuminate\Http\Request;
 use OOD\Order;
 use OOD\Status;
 use Session;
 use Auth;
+use Mail;
 
 class OrderController extends Controller
 {
@@ -68,7 +69,21 @@ class OrderController extends Controller
             $status = Status::findOrFail($request->status_id);
 
             $eventMessage = "Order $order->order_number set to $status->description by";
+
+            // Send push notification(s)
+            $job = $order->quote->job;
+            $payload = "Order $order->order_number($job->nickname) was changed to $status->description.";
+            foreach ($job->account->devices as $device) {
+                PushNotificationService::send($device, $payload);
+            }
+
+            // Send Mail
+            Mail::send('emails.jobs.order-has-changed', ['msg' => $payload, 'job' => $job], function ($message) use ($job) {
+                $message->to($job->account->email, $job->account->name)
+                    ->subject('Ocean of Diamonds Has Changed Your Order Status');
+            });
         }
+
 
         event(new LoggableEventOccurred($eventMessage, Auth::user(), $order->quote->job));
 

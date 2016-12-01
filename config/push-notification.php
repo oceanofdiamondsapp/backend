@@ -3,9 +3,9 @@
 return array(
 
     'appNameIOS'     => array(
-        'environment' =>'development',
-        'certificate' =>'/path/to/certificate.pem',
-        'passPhrase'  =>'password',
+        'environment' =>'production',
+        'certificate' =>'aps-ood-prod.pem',
+        'passPhrase'  =>'',
         'service'     =>'apns'
     ),
     'appNameAndroid' => array(

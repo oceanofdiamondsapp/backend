@@ -71,7 +71,7 @@ class SendMessage extends Command implements SelfHandling
 
         // Send push notification(s)
         foreach ($job->account->devices as $device) {
-            $payload = 'You have a new message';
+            $payload = 'You have a new message in job #' . $job->job_number . ' - ' . $job->nickname;
             PushNotificationService::send($device, $payload);
         }
 

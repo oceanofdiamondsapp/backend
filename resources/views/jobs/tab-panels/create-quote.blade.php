@@ -42,7 +42,7 @@
 		{!! Form::textarea('other_details', null, ['class' => 'form-control']) !!}
 	</div>
 
-	<label>Price: <small>(only total price is revealed to client)</small></label>
+	<label>Price: <small>(set shipping to $0.00 per our free shipping policy)</small></label>
 
 	<div class="form-horizontal">
 		<div class="form-group {{ !$errors->has('price') ?: 'has-error' }}">

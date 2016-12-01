@@ -113,7 +113,8 @@ class QuoteController extends Controller
 
         // Send push notification
         foreach ($job->account->devices as $device) {
-            $payload = 'You have a new quote';
+            $payload = 'You have a new quote in job #' . $job->job_number . ' - ' . $job->nickname;
+
             PushNotificationService::send($device, $payload);
         }
 
