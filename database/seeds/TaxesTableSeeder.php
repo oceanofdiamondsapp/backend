@@ -16,8 +16,8 @@ class TaxesTableSeeder extends Seeder {
 		DB::table('taxes')->delete();
 
 		Tax::create([
-			'description' => 'NJ 7%',
-			'amount' => 0.07
+			'description' => 'NJ 6.875%',
+			'amount' => 0.06875
 		]);
 
 		Tax::create([

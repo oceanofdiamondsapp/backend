@@ -106,7 +106,7 @@ $(document).ready(function() {
 
 	$('*[data-target-model=total]').on('input paste change', function() {
 		var total = 0;
-		var taxes = [1, 1.07, 1];
+		var taxes = [1, 1.06875, 1];
 		var selectedTax = taxes[$('select[name=tax_id]').val() || 0 ];
 
 		$('input[data-target-model=total]').each(function(idx, ele) {

@@ -16,7 +16,7 @@ class CreateTaxesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('description');
-			$table->decimal('amount', 3, 2);
+			$table->decimal('amount', 6, 5);
 			$table->timestamps();
 		});
 	}
